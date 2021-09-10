@@ -11,8 +11,9 @@ const NavBar = () => {
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/signin">Sign-In</Link></li>
-          <li><Link to="signup">Sign-up</Link></li>
-          <li><Link to="profile">Profile</Link></li>
+          <li><Link to="/signup">Sign-up</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/createpost">Create Post</Link></li>
         </ul>
       </div>
     </nav>
