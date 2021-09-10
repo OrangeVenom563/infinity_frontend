@@ -3,12 +3,13 @@
 a{
   color:black !important; 
 }
-
+/* nav */
 .brand-logo,h2{
   font-family: 'WindSong', cursive;
   font-weight:bold;
 }
 
+/* signup signin */
 .mycard{
   margin-top:30px;
 }
@@ -19,7 +20,7 @@ a{
   max-width:400px;
   margin:100px auto;
 }
-
+/* profile page */
 .gallery{
   display:flex;
   flex-wrap: wrap;
@@ -28,4 +29,15 @@ a{
 
 .item{
   width: 30%;
+}
+
+h6{
+  padding:3px;
+}
+
+/* home */
+.home-card{
+  max-width:500px;
+  height:max-content;
+  margin:26px auto;
 }

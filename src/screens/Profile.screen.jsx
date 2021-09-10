@@ -2,7 +2,7 @@ import React from "react";
 
 const Profile = ()=>{
     return(
-        <div>
+        <div style={{maxWidth:"550px",margin:"auto"}}>
             <div style={{
                 display:"flex",
                 justifyContent:"space-around",
