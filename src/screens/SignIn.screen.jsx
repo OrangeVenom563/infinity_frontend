@@ -32,10 +32,14 @@ const SignIn = () => {
         if (data.error) {
           M.toast({ html: data.error, classes: "#c62828 red darken-3" });
         } else {
-            console.log(data);
+          localStorage.setItem("jwt",data.token);
+          localStorage.setItem("user",JSON.stringify(data.user));
           M.toast({ html:"Sign-In success", classes: "#43a047 green darken-1" });
           history.push("/");
         }
+      })
+      .catch(err=>{
+        console.log(err)
       });
   };
   return (
