@@ -1,31 +1,75 @@
-import React from "react";
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import M from "materialize-css";
 
-const SignIn = ()=>{
-    return(
-        <div className="mycard">
-            <div className="card auth-card input-field">
-                <h2>Infinity</h2>
-                <input type="text"
-                placeholder="name"/>
+const SignIn = () => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const history = useHistory();
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const PostData = () => {
+    if (!emailRegex.test(email)) 
+      {
+      M.toast({
+        html: "Invalid Email Format",
+        classes: "#c62828 red darken-3",
+      });
+      return;
+    }
+    // console.log(name, email, password);
+    fetch("/signin", {
+      method: "post",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+        email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          M.toast({ html: data.error, classes: "#c62828 red darken-3" });
+        } else {
+            console.log(data);
+          M.toast({ html:"Sign-In success", classes: "#43a047 green darken-1" });
+          history.push("/");
+        }
+      });
+  };
+  return (
+    <div className="mycard">
+      <div className="card auth-card input-field">
+        <h2>Infinity</h2>
 
-                <input type="text"
-                placeholder="email"/>
-                
-                <input type="password"
-                placeholder="password"/>
+        <input
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-                <button className="btn waves-effect waves-light #645f6 blur">
-                    Sign-In
-                </button>
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-                <h6>
-                    <Link to="/signup">Already have an account?</Link>
-                </h6>
+        <button
+          className="btn waves-effect waves-light #645f6 blur"
+          onClick={() => PostData()}
+        >
+          Sign-In
+        </button>
 
-            </div>
-        </div>
-    )
-}
+        <h6>
+          <Link to="/signup">Don't have an account? Sign-In</Link>
+        </h6>
+      </div>
+    </div>
+  );
+};
 
 export default SignIn;
