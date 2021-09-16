@@ -6,7 +6,7 @@ const Profile = () => {
   const {state} = useContext(UserContext);
 
   useEffect(() => {
-    fetch("/mypost", {
+    fetch("https://dry-wave-33980.herokuapp.com/mypost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },

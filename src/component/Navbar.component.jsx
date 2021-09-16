@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <nav>
       <div className="nav-wrapper white">
-        <Link to="/" className="brand-logo"> Infinity </Link>
+        <Link to="/" className="brand-logo left"> Infinity </Link>
         {/* hide-on-med-and-down */}
         <ul id="nav-mobile" className="right ">
           <RenderList/>

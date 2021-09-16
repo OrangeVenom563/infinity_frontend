@@ -59,3 +59,5 @@ function App() {
 }
 
 export default App;
+
+// "proxy": "https://dry-wave-33980.herokuapp.com/",

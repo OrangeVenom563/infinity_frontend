@@ -7,7 +7,7 @@ const Home = () => {
   const {state} = useContext(UserContext);
 
   useEffect(() => {
-    fetch("/allpost", {
+    fetch("https://dry-wave-33980.herokuapp.com/allpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   const likePost = (id) => {
-      fetch("/like",{
+      fetch("https://dry-wave-33980.herokuapp.com/like",{
           method:"put",
           headers:{
               "Content-Type":"application/json",
@@ -31,9 +31,8 @@ const Home = () => {
       })
       .then(res=>res.json())
       .then(result=>{
-          console.log("this is result",result)
           const newData = data.map(item=>{
-              if(item._id==result._id){
+              if(item._id===result._id){
                   return result
               }
               else{
@@ -46,7 +45,7 @@ const Home = () => {
   }
 
   const unlikePost = (id) => {
-    fetch("/unlike",{
+    fetch("https://dry-wave-33980.herokuapp.com/unlike",{
         method:"put",
         headers:{
             "Content-Type":"application/json",
@@ -58,9 +57,8 @@ const Home = () => {
     })
     .then(res=>res.json())
       .then(result=>{
-          console.log(result)
           const newData = data.map(item=>{
-              if(item._id==result._id){
+              if(item._id===result._id){
                   return result
               }
               else{
@@ -74,7 +72,7 @@ const Home = () => {
 }
 
 const makeComment = (text,postId)=>{
-  fetch("/comment",{
+  fetch("https://dry-wave-33980.herokuapp.com/comment",{
     method:"put",
     headers:{
         "Content-Type":"application/json",
@@ -87,9 +85,8 @@ const makeComment = (text,postId)=>{
 })
 .then(res=>res.json())
 .then(result=>{
-    console.log("this is result",result)
     const newData = data.map(item=>{
-        if(item._id==result._id){
+        if(item._id===result._id){
             return result
         }
         else{
@@ -102,7 +99,7 @@ const makeComment = (text,postId)=>{
 }
 
 const deletePost = (postid)=>{
-  fetch(`/deletepost/${postid}`,{
+  fetch(`https://dry-wave-33980.herokuapp.com/deletepost/${postid}`,{
     method:"delete",
     headers:{
       "Authorization":"Bearer "+localStorage.getItem("jwt")
@@ -110,7 +107,6 @@ const deletePost = (postid)=>{
   })
   .then(res => res.json())
   .then(result=>{
-    console.log(result);
     const newData = data.filter(item=>{
       return item._id !== result._id;
     })
@@ -122,7 +118,6 @@ const deletePost = (postid)=>{
   return (
     <div className="home">
       {data.map((item) => {
-        console.log({posted:item.postedBy._id,state:state._id,item:item._id});
         return (
           <div className="card home-card" key={item._id}>
             <h5>{item.postedBy.name}</h5>
@@ -138,7 +133,7 @@ const deletePost = (postid)=>{
                   <i className="material-icons" onClick={()=>{likePost(item._id)}}>thumb_up</i>
               }
               {
-                item.postedBy._id == state._id &&
+                item.postedBy._id === state._id &&
                 <i className="material-icons right" onClick={()=>{deletePost(item._id)}}>delete</i>
               }
               <h6>{item.likes.length} Likes</h6>

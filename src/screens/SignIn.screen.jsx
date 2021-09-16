@@ -18,16 +18,12 @@ const SignIn = () => {
       });
       return;
     }
-    // console.log(name, email, password);
-    fetch("/signin", {
+    fetch("https://dry-wave-33980.herokuapp.com/signin", {
       method: "post",
       headers: {
         "content-Type": "application/json",
       },
-      body: JSON.stringify({
-        password,
-        email,
-      }),
+      body: JSON.stringify({password,email}),
     })
       .then((res) => res.json())
       .then((data) => {

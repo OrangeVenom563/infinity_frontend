@@ -2,7 +2,6 @@
   "name": "insta_frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://dry-wave-33980.herokuapp.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
