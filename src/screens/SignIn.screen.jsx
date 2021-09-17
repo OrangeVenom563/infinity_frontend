@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {UserContext} from '../App'
+import { URL } from "../globals/constants";
 import M from "materialize-css";
 
 const SignIn = () => {
@@ -18,7 +19,7 @@ const SignIn = () => {
       });
       return;
     }
-    fetch("https://dry-wave-33980.herokuapp.com/signin", {
+    fetch(URL+"/signin", {
       method: "post",
       headers: {
         "content-Type": "application/json",

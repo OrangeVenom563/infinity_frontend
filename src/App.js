@@ -8,6 +8,7 @@ import SignUp from "./screens/SignUp.screen";
 import Profile from "./screens/Profile.screen";
 import CreatePost from "./screens/CreatePost.screen";
 import { reducer, initialState } from "./reducers/userReducer";
+import UserProfile from "./screens/UserProfile";
 
 export const UserContext = createContext();
 
@@ -42,6 +43,9 @@ const Routing = () => {
       <Route exact path="/createpost">
         <CreatePost />
       </Route>
+      <Route path="/profile/:userid">
+        <UserProfile />
+      </Route>
     </Switch>
   );
 };
@@ -59,5 +63,3 @@ function App() {
 }
 
 export default App;
-
-// "proxy": "https://dry-wave-33980.herokuapp.com/",

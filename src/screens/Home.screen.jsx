@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import {UserContext} from '../App';
-
+import { URL } from "../globals/constants";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const {state} = useContext(UserContext);
 
   useEffect(() => {
-    fetch("https://dry-wave-33980.herokuapp.com/allpost", {
+    fetch(URL+"/allpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -16,10 +17,10 @@ const Home = () => {
       .then((result) => {
         setData(result.posts);
       });
-  }, []);
+  },[]);
 
   const likePost = (id) => {
-      fetch("https://dry-wave-33980.herokuapp.com/like",{
+      fetch(URL+"/like",{
           method:"put",
           headers:{
               "Content-Type":"application/json",
@@ -45,7 +46,7 @@ const Home = () => {
   }
 
   const unlikePost = (id) => {
-    fetch("https://dry-wave-33980.herokuapp.com/unlike",{
+    fetch(URL+"/unlike",{
         method:"put",
         headers:{
             "Content-Type":"application/json",
@@ -72,7 +73,7 @@ const Home = () => {
 }
 
 const makeComment = (text,postId)=>{
-  fetch("https://dry-wave-33980.herokuapp.com/comment",{
+  fetch(URL+"/comment",{
     method:"put",
     headers:{
         "Content-Type":"application/json",
@@ -99,7 +100,7 @@ const makeComment = (text,postId)=>{
 }
 
 const deletePost = (postid)=>{
-  fetch(`https://dry-wave-33980.herokuapp.com/deletepost/${postid}`,{
+  fetch(URL+`/deletepost/${postid}`,{
     method:"delete",
     headers:{
       "Authorization":"Bearer "+localStorage.getItem("jwt")
@@ -120,7 +121,7 @@ const deletePost = (postid)=>{
       {data.map((item) => {
         return (
           <div className="card home-card" key={item._id}>
-            <h5>{item.postedBy.name}</h5>
+          <Link to={item.postedBy._id !== state._id? `profile/${item.postedBy._id}` : "/profile"} ><h5>{item.postedBy.name}</h5> </Link>
             <div className="card-image">
               <img src={item.photo} alt="post pic" />
             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
+import { URL } from "../globals/constants";
 
 const SignUp = () => {
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ const SignUp = () => {
       return;
     }
     // console.log(name, email, password);
-    fetch("https://dry-wave-33980.herokuapp.com/signup", {
+    fetch(URL+"/signup", {
       method: "post",
       headers: {
         "content-Type": "application/json",

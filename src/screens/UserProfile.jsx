@@ -1,24 +1,29 @@
 import React, { useEffect, useState, useContext } from "react";
-import {UserContext} from '../App';
+import { useParams } from "react-router-dom";
 import { URL } from "../globals/constants";
 
-const Profile = () => {
-  const [mypic, setPics] = useState([]);
-  const {state} = useContext(UserContext);
- 
+const UserProfile = () => {
+  const [mypic, setPics] = useState(null);
+//   const {state} = useContext(UserContext);
+  const {userid} = useParams();
+
   useEffect(() => {
-    fetch(URL+"/mypost", {
+      console.log(userid)
+    fetch(URL+`/user/${userid}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => res.json())
       .then((result) => {
-        setPics(result.mypost);
+          console.log(result)
+        setPics(result);
       });
   }, []);
-  return (
-    <div style={{ maxWidth: "550px", margin: "auto" }}>
+  return (<>
+      {!mypic? <div>loading</div>:
+      
+        <div style={{ maxWidth: "550px", margin: "auto" }}>
       <div
         style={{
           display: "flex",
@@ -34,7 +39,7 @@ const Profile = () => {
           />
         </div>
         <div>
-          <h4>{state.name}</h4>
+          <h4>{mypic.user.name}</h4>
           <div
             style={{
               display: "flex",
@@ -50,12 +55,14 @@ const Profile = () => {
       </div>
 
       <div className="gallery">
-        {mypic.map((item) => (
+        {mypic.posts.map((item) => (
           <img key={item._id} className="item" src={item.photo} alt={item.title} />
         ))}
       </div>
     </div>
+      }
+    </>
   );
 };
 
-export default Profile;
+export default UserProfile;

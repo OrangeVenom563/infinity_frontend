@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import env from "react-dotenv";
+import { URL } from "../globals/constants";
 import { useHistory } from "react-router";
 import M from "materialize-css";
 
@@ -12,7 +12,7 @@ const CreatePost = () => {
 
    useEffect(() => {
       if (url) {
-        fetch("/createpost", {
+        fetch(URL+"/createpost", {
           method: "post",
           headers: {
             "Content-Type": "application/json",
