@@ -9,10 +9,9 @@ const NavBar = () => {
   const RenderList = () => {
     if(state){
       return [
-        // <li><Link to="/">Home</Link></li>,
-        <li><Link to="/profile">Profile</Link></li>,
-        <li><Link to="/createpost">Create Post</Link></li>,
-        <li><a onClick={()=>{
+        <li key="1"><Link to="/profile">Profile</Link></li>,
+        <li key="2"><Link to="/createpost">Create Post</Link></li>,
+        <li key="3"><a onClick={()=>{
           localStorage.clear(); 
           dispatch({type:"CLEAR"})
           history.push("/signin")
@@ -21,8 +20,8 @@ const NavBar = () => {
     }
     else{
       return [
-      <li><Link to="/signin">Sign-In</Link></li>,
-      <li><Link to="/signup">Sign-up</Link></li>
+      <li key="4"><Link to="/signin">Sign-In</Link></li>,
+      <li key="5"><Link to="/signup">Sign-up</Link></li>
     ]
     }
   }
