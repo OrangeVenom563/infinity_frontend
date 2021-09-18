@@ -71,6 +71,9 @@ const SignIn = () => {
         <h6>
           <Link to="/signup">Don't have an account? Sign-In</Link>
         </h6>
+        <p style={{fontSize:"smaller"}}>
+                <Link to="/reset">Forgot password ?</Link>
+        </p>
       </div>
     </div>
   );

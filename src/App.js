@@ -1,14 +1,15 @@
 import "./App.css";
 import React, { useEffect, createContext, useReducer, useContext } from "react";
 import { Route, Switch, BrowserRouter, useHistory } from "react-router-dom";
+import { reducer, initialState } from "./reducers/userReducer";
 import NavBar from "./component/Navbar.component";
 import Home from "./screens/Home.screen";
 import SignIn from "./screens/SignIn.screen";
 import SignUp from "./screens/SignUp.screen";
 import Profile from "./screens/Profile.screen";
 import CreatePost from "./screens/CreatePost.screen";
-import { reducer, initialState } from "./reducers/userReducer";
 import UserProfile from "./screens/UserProfile";
+import Reset from "./screens/Reset";
 
 export const UserContext = createContext();
 
@@ -45,6 +46,9 @@ const Routing = () => {
       </Route>
       <Route path="/profile/:userid">
         <UserProfile />
+      </Route>
+      <Route exact path="/reset">
+        <Reset/>
       </Route>
     </Switch>
   );

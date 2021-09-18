@@ -3,12 +3,10 @@ import { useParams } from "react-router-dom";
 import { URL } from "../globals/constants";
 
 const UserProfile = () => {
-  const [mypic, setPics] = useState(null);
-//   const {state} = useContext(UserContext);
+  const [userDetails, setUserDetails] = useState(null);
   const {userid} = useParams();
 
   useEffect(() => {
-      console.log(userid)
     fetch(URL+`/user/${userid}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -17,11 +15,11 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((result) => {
           console.log(result)
-        setPics(result);
+        setUserDetails(result);
       });
   }, []);
   return (<>
-      {!mypic? <div>loading</div>:
+      {!userDetails? <div>loading</div>:
       
         <div style={{ maxWidth: "550px", margin: "auto" }}>
       <div
@@ -39,7 +37,7 @@ const UserProfile = () => {
           />
         </div>
         <div>
-          <h4>{mypic.user.name}</h4>
+          <h4>{userDetails.user.name}</h4>
           <div
             style={{
               display: "flex",
@@ -55,7 +53,7 @@ const UserProfile = () => {
       </div>
 
       <div className="gallery">
-        {mypic.posts.map((item) => (
+        {userDetails.posts.map((item) => (
           <img key={item._id} className="item" src={item.photo} alt={item.title} />
         ))}
       </div>
