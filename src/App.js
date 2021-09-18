@@ -10,6 +10,7 @@ import Profile from "./screens/Profile.screen";
 import CreatePost from "./screens/CreatePost.screen";
 import UserProfile from "./screens/UserProfile";
 import Reset from "./screens/Reset";
+import NewPassword from "./screens/Newpassword";
 
 export const UserContext = createContext();
 
@@ -23,6 +24,7 @@ const Routing = () => {
       dispatch({type:"USER",payload:user})
       history.push("/");
     } else {
+      if(!history.location.pathname.startsWith('/reset'))
       history.push("/signin");
     }
   },[]);
@@ -49,6 +51,9 @@ const Routing = () => {
       </Route>
       <Route exact path="/reset">
         <Reset/>
+      </Route>
+      <Route exact path="/reset/:token">
+        <NewPassword/>
       </Route>
     </Switch>
   );
